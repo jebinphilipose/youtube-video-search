@@ -4,6 +4,7 @@ from celery import shared_task
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from decouple import config, Csv
+from .models import Video
 from requests.exceptions import HTTPError
 
 
@@ -35,10 +36,15 @@ def fetch_youtube_videos():
 
         data = response.json()
 
-        print(data)
-
         for item in data['items']:
-            pass
+            if Video.objects.filter(pk=item['id']['videoId']).exists():
+                print('Video already exists in DB')
+            else:
+                Video.objects.create(id=item['id']['videoId'],
+                                     title=item['snippet']['title'],
+                                     published_at=item['snippet']['publishedAt'],
+                                     description=item['snippet']['description'],
+                                     thumbnail_url=item['snippet']['thumbnails']['high']['url'])
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
