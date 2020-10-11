@@ -125,3 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+# Celery
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+result_backend = config('CELERY_RESULT_BACKEND')
+timezone = TIME_ZONE
