@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
 result_backend = config('CELERY_RESULT_BACKEND')
 timezone = TIME_ZONE
+
+# REST Pagination
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
+}
