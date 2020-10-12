@@ -1,0 +1,53 @@
+nav {
+  background-color: #262626;
+  width: calc(100% - 300px);
+}
+
+nav .brand-logo.center {
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+#video-card-wrapper {
+  margin: 40px 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-gap: 20px;
+}
+
+#video-card-wrapper .card {
+  position: relative;
+  width: 270px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#video-card-wrapper .card h6 {
+  color: grey;
+  margin-bottom: 10px;
+}
+
+#video-card-wrapper .card p {
+  font-size: 1.2rem;
+  margin: 0 auto 5px;
+}
+
+#message-box {
+  text-align: center;
+}
+
+/* Responsive media queries */
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+      padding-left: 0;
+  }
+
+  nav {
+      width: 100%;
+  }
+}

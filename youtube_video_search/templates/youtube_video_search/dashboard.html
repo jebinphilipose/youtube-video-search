@@ -1,0 +1,54 @@
+{% extends 'youtube_video_search/base.html' %}
+{% block content %}
+<!--Navbar-->
+<header>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo center">YouTube Video Search</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <!--Sidebar-->
+    <ul class="sidenav sidenav-fixed" id="mobile-demo">
+        <div class="container" style="width: 100%;">
+            <h4 class="center-align">Filters</h4>
+            <div class="row">
+                <form id="filter-form" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="input-field col s12">
+                        <p>Search Query:</p>
+                        <select name="query">
+                            <option value="music" {% if query == 'music' %}selected {% endif %}>Music</option>
+                            <option value="football" {% if query == 'football' %}selected {% endif %}>Football</option>
+                        </select>
+                        <p>Sort By Published Date:</p>
+                        <select name="sort">
+                            <option value="asc" {% if sort == 'asc' %}selected {% endif %}>Asc</option>
+                            <option value="desc" {% if sort == 'desc' %}selected {% endif %}>Desc</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ul>
+    <div id="video-card-wrapper">
+        {% for video in videos %}
+        <div class="card">
+            <div class="image">
+                <img src="{{ video.thumbnail_url }}" class="responsive-img" alt="video">
+            </div>
+            <a href="https://www.youtube.com/watch?v={{ video.id }}">{{ video.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% if not videos %}
+    <div id="message-box">
+        <span>No videos found</span>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}
